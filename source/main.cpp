@@ -1,12 +1,7 @@
 #include "sdllib.h"
-
-#define SCREEN_FPS 30
-
+#include "jsonlib.h"
 int main(int argc, char *argv[]) {
-	const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
-	int frame = 0;
-	SDL_Event event;
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	bool done = false;
@@ -29,6 +24,7 @@ int main(int argc, char *argv[]) {
 		SDL_Quit();
 		return -1;
 	}
+	set_sdl_renderer(renderer);
 
 	int w = 1920;
 	int h = 1080;
@@ -40,11 +36,11 @@ int main(int argc, char *argv[]) {
 	SDL_Rect f = {0, 0, 1920, 1080};
 	SDL_RenderFillRect(renderer, &f);
 
-	frame = 0;
 	while (!done) {
 		hidScanInput();
 		if (isButtonPressed(CONTROLLER_P1_AUTO,KEY_A)) {
-			draw_filled_circle(renderer,64,64,15,Color{255,0,0,255});
+			const char* render_obj = createRenderObject("filled_circle",0,0,15,0,0,Color{255,0,0,255});
+			pushToRenderList(render_obj);
 			update = true;
 		}
 		else if (isButtonPressed(CONTROLLER_P1_AUTO,buttonNameToNumber("+"))) {
@@ -52,7 +48,7 @@ int main(int argc, char *argv[]) {
 		}
 
 			if (update == true) {
-
+				processRenderQueue();
 				SDL_RenderPresent(renderer);
 				update = false;
 			}
