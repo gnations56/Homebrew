@@ -6,6 +6,7 @@ int main(int argc, char *argv[]) {
 	SDL_Renderer *renderer;
 	bool done = false;
 	bool update = true;
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0) {
 		SDL_Log("SDL_Init: %s\n", SDL_GetError());
 		return -1;
@@ -36,6 +37,8 @@ int main(int argc, char *argv[]) {
 	SDL_Rect f = {0, 0, 1920, 1080};
 	SDL_RenderFillRect(renderer, &f);
 
+
+	processRenderQueue();
 	while (!done) {
 		hidScanInput();
 		if (isButtonPressed(CONTROLLER_P1_AUTO,KEY_A)) {

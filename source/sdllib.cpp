@@ -4,7 +4,7 @@
 
 #include "sdllib.h"
 #include "jsonlib.h"
-std::vector<const char*> render_queue (50);
+static std::vector<const char*> render_queue(50);
 SDL_Renderer *renderer;
 
 void set_sdl_renderer(SDL_Renderer *render) {
@@ -39,16 +39,21 @@ void draw_outline_rounded_rectangle(SDL_Renderer *renderer,int xpos,int ypos, in
 }
 
 void pushToRenderList(const char* torender) {
+//	SDL_Log("value of iter: %s",torender);
 	render_queue.push_back(torender);
 }
 
 void processRenderQueue() {
 	for (std::vector<const char*>::iterator it = render_queue.begin(); it != render_queue.end(); it++) {
-	renderSDLObject(*it);
+		if (*it != NULL) {
+//			SDL_Log("value of iter: %s", *it);
+			renderSDLObject(*it);
+		}
 	}
 }
 
 void renderSDLObject(const char* render_object ) {
+
 	json_object *obj_to_render = json_tokener_parse(render_object);
 	const char* call = getCall(obj_to_render);
 	int xpos = getXOffset(obj_to_render);

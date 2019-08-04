@@ -7,7 +7,7 @@
 #include <SDL2_gfxPrimitives.h>
 #include <string>
 #include <vector>
-
+#include <errno.h>
 #ifndef HOMEBREW_SDLLIB_H
 #define HOMEBREW_SDLLIB_H
 
