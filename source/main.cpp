@@ -1,5 +1,6 @@
 #include "sdllib.h"
 #include "jsonlib.h"
+#include "soundlib.h"
 int main(int argc, char *argv[]) {
 
 	SDL_Window *window;
@@ -36,6 +37,11 @@ int main(int argc, char *argv[]) {
 	SDL_GetWindowSize(window, &w, &h);
 	SDL_Rect f = {0, 0, 1920, 1080};
 	SDL_RenderFillRect(renderer, &f);
+	initializeMixer(44100,2,2048);
+	Mix_Music *bgm = loadMusicFile("data/Insert.wav");
+	playMusic(bgm,-1);
+	Mix_Chunk *sfx = loadSFXFile("data/Shutdown.wav");
+
 
 
 	processRenderQueue();
@@ -47,6 +53,7 @@ int main(int argc, char *argv[]) {
 			update = true;
 		}
 		else if (isButtonPressed(CONTROLLER_P1_AUTO,buttonNameToNumber("+"))) {
+			playSFX(sfx,-1,0);
 			done = 1;
 		}
 

@@ -53,7 +53,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:=	`$(DEVKITPRO)/portlibs/switch/bin/aarch64-none-elf-pkg-config SDL2_gfx json-c --libs` `sdl2-config --libs`
+LIBS	:=	`$(DEVKITPRO)/portlibs/switch/bin/aarch64-none-elf-pkg-config SDL2_gfx SDL2_mixer json-c --libs` `sdl2-config --libs`
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -186,6 +186,11 @@ $(OFILES_SRC)	: $(HFILES_BIN)
 	@echo $(notdir $<)
 	@$(bin2o)
 
+#---------------------------------------------------------------------------------
+%.wav.o	%.wav.h :	%.wav
+#---------------------------------------------------------------------------------
+	@echo $(notdir $<)
+	@$(bin2o)
 -include $(DEPENDS)
 
 #---------------------------------------------------------------------------------------

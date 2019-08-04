@@ -5,7 +5,7 @@
 #include "masterinc.h"
 #include <SDL.h>
 #include <SDL2_gfxPrimitives.h>
-#include <string>
+
 #include <vector>
 #include <errno.h>
 #ifndef HOMEBREW_SDLLIB_H

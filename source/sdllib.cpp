@@ -65,6 +65,12 @@ void renderSDLObject(const char* render_object ) {
 	if (strcmp("filled_circle",call) == 0) {
 		draw_filled_circle(renderer,xpos,ypos,radius,c);
 	}
+	else if (strcmp("filled_rectangle",call) == 0) {
+		draw_filled_rectangle(renderer,xpos,ypos,width,height,c);
+	}
+	else if (strcmp("filled_rounded_rectangle",call) == 0) {
+		draw_filled_rounded_rectangle(renderer, xpos,ypos,width,height,radius,c);
+	}
 }
 
 int buttonNameToNumber(std::string name) {
