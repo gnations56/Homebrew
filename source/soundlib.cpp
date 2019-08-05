@@ -30,8 +30,15 @@ void playMusic(Mix_Music *music, int loops) {
 	Mix_PlayMusic(music,loops);
 }
 
-int playSFX(Mix_Chunk *sfx, int channel, int times_to_repeat){
-	Mix_PlayChannel(channel,sfx,times_to_repeat);
+int playSFX(Mix_Chunk *sfx, int channel, int times_to_repeat) {
+	printf("Chunk data %x",*sfx);
+//	if (*sfx == NULL) {
+//		printf("chunk is null");
+//		return -2;
+//	}
+//	else {
+//		Mix_PlayChannel(channel, sfx, times_to_repeat);
+//	}
 }
 
 void pauseMusic() {
